@@ -1,14 +1,14 @@
-package br.com.dalla.project.ficha;
+package br.com.dalla.project.fitcard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FichaApplication {
+public class FitCardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FichaApplication.class, args);
-		System.out.println("eia eia eia ");
+		SpringApplication.run(FitCardApplication.class, args);
+		System.out.println("Pai ta online");
 	}
 
 }

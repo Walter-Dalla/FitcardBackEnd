@@ -1,0 +1,5 @@
+insert into categoria (NOME_DA_CATEGORIA) values ("Supermercado");
+insert into categoria (NOME_DA_CATEGORIA) values ("Restaurante");
+insert into categoria (NOME_DA_CATEGORIA) values ("Borracharia");
+insert into categoria (NOME_DA_CATEGORIA) values ("Posto");
+insert into categoria (NOME_DA_CATEGORIA) values ("Oficina");

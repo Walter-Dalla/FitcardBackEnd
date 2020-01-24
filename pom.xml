@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.dalla.project</groupId>
-	<artifactId>ficha</artifactId>
+	<artifactId>FitCard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ficha</name>
-	<description>Project ficha de DeD</description>
+	<name>FitCard</name>
+	<description>Project FitCard</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -48,6 +48,16 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 	</dependencies>
 
