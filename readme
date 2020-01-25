@@ -11,7 +11,7 @@ insert into categoria (NOME_DA_CATEGORIA) values ("Posto");
 insert into categoria (NOME_DA_CATEGORIA) values ("Oficina");
 
 OBS:
-Vá no arquivo ./applcation.properties e troque as variaveis dos parametros:
+Vá no arquivo ./src/main/resources/applcation.properties e troque as variaveis dos parametros:
 spring.datasource.username=
 spring.datasource.password=
 E colocando o nome da sua conecção com o banco EX:

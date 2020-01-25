@@ -2,8 +2,6 @@ package br.com.dalla.project.fitcard.usuario.login.token;
 
 import br.com.dalla.project.fitcard.erros.BadRequestException;
 import br.com.dalla.project.fitcard.erros.ForbiddenException;
-import br.com.dalla.project.fitcard.usuario.conexao.ConexaoModel;
-import br.com.dalla.project.fitcard.usuario.login.token.TokenRepository;
 
 import br.com.dalla.project.fitcard.usuario.login.token.utils.TokenUtils;
 import br.com.dalla.project.fitcard.usuario.login.encrypt.TokenEncriptacao;

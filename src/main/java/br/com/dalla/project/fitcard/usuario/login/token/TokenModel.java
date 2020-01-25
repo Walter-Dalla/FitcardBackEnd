@@ -1,7 +1,5 @@
 package br.com.dalla.project.fitcard.usuario.login.token;
 
-
-import br.com.dalla.project.fitcard.usuario.conexao.ConexaoModel;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
