@@ -1,8 +1,9 @@
-Antes de rodar o servidor:
+Antes de iniciar o servidor deve-se rodar o seguinte comando para criar o banco de dados:
 
 create database fitcarddev;
 
-Depois/durante rodar o servidor:
+As tabelas, relacionamentos e outras individualidades do banco é automaticamente gerado pelo processo do servidor, logo, não há a necessidade de se passar os comandos de geração SQL.
+Após rodar os servidor basta executar os seguintes comandos:
 insert into categoria (NOME_DA_CATEGORIA) values ("Supermercado");
 insert into categoria (NOME_DA_CATEGORIA) values ("Restaurante");
 insert into categoria (NOME_DA_CATEGORIA) values ("Borracharia");
