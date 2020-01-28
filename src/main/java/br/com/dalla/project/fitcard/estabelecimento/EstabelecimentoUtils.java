@@ -21,8 +21,8 @@ public class EstabelecimentoUtils {
 
         estabelicimento.setCategoria(categoria);
 
-        if (categoria.getCategoria() == "Supermercado") {
-            if (estabelicimento.getTelefone() == null)
+        if (categoria.getCategoria().equals("Supermercado")) {
+            if (estabelicimento.getTelefone() == null || estabelicimento.getTelefone().equals(""))
                 erro.add("A categoria \"Supermercado\" exige que se adicione um telefone");
 
         }

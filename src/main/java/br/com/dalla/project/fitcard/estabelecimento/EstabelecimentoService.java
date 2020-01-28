@@ -1,3 +1,4 @@
+
 package br.com.dalla.project.fitcard.estabelecimento;
 
 import br.com.dalla.project.fitcard.categoria.CategoriaModel;
@@ -97,9 +98,11 @@ public class EstabelecimentoService implements Serializable {
                     categoriaRepository.findByCategoria(estabelicimento.getCategoria().getCategoria());
             if(!categoriaOptional.isPresent())
                 erro.add("Categoria não encontrada!");
-            else
+            else{
                 estabelecimentoNoBanco.setCategoria(categoriaOptional.get());
-        }
+        	erro = EstabelecimentoUtils.validaCategoria(estabelicimento, categoriaOptional.get(), erro);
+		}
+	}
 
         if(!erro.isEmpty())
             throw new BadRequestException(erro);
