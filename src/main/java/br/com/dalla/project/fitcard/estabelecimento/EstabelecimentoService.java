@@ -3,9 +3,12 @@ package br.com.dalla.project.fitcard.estabelecimento;
 
 import br.com.dalla.project.fitcard.categoria.CategoriaModel;
 import br.com.dalla.project.fitcard.categoria.CategoriaRepository;
-import br.com.dalla.project.fitcard.erros.BadRequestException;
+import br.com.dalla.project.fitcard.categoria.CategoriaUtils;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.BaseException;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
-import br.com.dalla.project.fitcard.utils.Utils;
+import br.com.dalla.project.fitcard.utils.ErroUtils;
+import br.com.dalla.project.fitcard.utils.OptionalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +36,8 @@ public class EstabelecimentoService implements Serializable {
             String telefone, Date dataCadastro, Date dataAlteracao,
             String categoria, Boolean status, String conta, String agencia, UsuarioModel usuario) {
 
-        CategoriaModel categoriaObj = null;
-        Optional<CategoriaModel> categoriaOptional = categoriaRepository.findByCategoria(categoria);
-        if(categoriaOptional.isPresent())
-            categoriaObj = categoriaOptional.get();
+        CategoriaModel categoriaObj = (CategoriaModel) OptionalUtils.isObjectPresent
+                (categoriaRepository.findByCategoria(categoria));
 
         return estabelecimentoRepository.findAllByEstabelecimento(usuario.getId(), cnpj,  razaoSocial,  nomeFantasia,
                 email,  endereco,  cidade,  estado,
@@ -46,84 +47,71 @@ public class EstabelecimentoService implements Serializable {
     }
 
     public EstabelicimentoModel addEstabelecimento(EstabelicimentoModel estabelecimento, UsuarioModel usuario)
-            throws BadRequestException {
+            throws BaseException {
 
         List<String> erro = new ArrayList<>();
+
         Optional<EstabelicimentoModel> estabelecimentoOptional =
                 estabelecimentoRepository.findByCnpj(estabelecimento.getCnpj());
 
-        if(estabelecimentoOptional.isPresent())
-            erro.add("Já há um estabelecimento com esse cnpj");
+        OptionalUtils.objectCanotBePresent(estabelecimentoOptional, erro,
+                "Já há um estabelecimento com esse cnpj");
 
+        validaEstabelecimento(estabelecimento, erro);
 
-        EstabelecimentoUtils.validEstabelecimentoOnAdd(estabelecimento, erro);
-
-
-        if(estabelecimento.getCategoria() != null){
-            Optional<CategoriaModel> categoriaOptional =
-                    categoriaRepository.findByCategoria(estabelecimento.getCategoria().getCategoria());
-            if(!categoriaOptional.isPresent())
-                erro.add("Essa categoria não existe");
-            else
-                erro = EstabelecimentoUtils.validaCategoria(estabelecimento, categoriaOptional.get(), erro);
-        }
-
-        if(!erro.isEmpty())
-            throw new BadRequestException(erro);
+        ErroUtils.validaErro(erro, new BadRequestException(erro));
 
         estabelecimento.setUsuario(usuario);
 
-        EstabelicimentoModel estabelicimentoSaved = estabelecimentoRepository.save(estabelecimento);
-
-        return  estabelicimentoSaved;
+        return  estabelecimentoRepository.save(estabelecimento);
     }
 
 
     public EstabelicimentoModel alterEstabelecimento(EstabelicimentoModel estabelicimento, UsuarioModel usuario)
-            throws BadRequestException {
+            throws BaseException {
+
+
 
         List<String> erro = new ArrayList<>();
         Optional<EstabelicimentoModel> estabelecimentoOptional =
                 estabelecimentoRepository.findByCnpjAndUsuario(estabelicimento.getCnpj(), usuario);
 
-        if(!estabelecimentoOptional.isPresent())
-            erro.add("Não há um estabelecimento com esse cnpj");
+        EstabelicimentoModel estabelecimentoNoBanco = (EstabelicimentoModel)
+                OptionalUtils.addErrorIfObjectIsNotPresent(estabelecimentoOptional,
+                        new BadRequestException("Não há um estabelecimento com esse cnpj"));
 
-        EstabelicimentoModel estabelecimentoNoBanco = estabelecimentoOptional.get();
+        EstabelecimentoUtils.copyObjectIfNewIsNotNull(estabelicimento, estabelecimentoNoBanco);
+        validaEstabelecimento(estabelicimento, erro);
+        estabelecimentoNoBanco.setCategoria(estabelicimento.getCategoria());
 
-        EstabelecimentoUtils.validaEstabelecimentoOnEdditing(estabelicimento, estabelecimentoNoBanco);
-
-        if(estabelicimento.getCategoria() != null) {
-            Optional<CategoriaModel> categoriaOptional =
-                    categoriaRepository.findByCategoria(estabelicimento.getCategoria().getCategoria());
-            if(!categoriaOptional.isPresent())
-                erro.add("Categoria não encontrada!");
-            else{
-                estabelecimentoNoBanco.setCategoria(categoriaOptional.get());
-        	erro = EstabelecimentoUtils.validaCategoria(estabelicimento, categoriaOptional.get(), erro);
-		}
-	}
-
-        if(!erro.isEmpty())
-            throw new BadRequestException(erro);
+        ErroUtils.validaErro(erro, new BadRequestException(erro));
 
         return estabelecimentoRepository.save(estabelecimentoNoBanco);
     }
 
     public EstabelicimentoModel deleteEstabelecimento(String cnpj, UsuarioModel usuario)
-            throws BadRequestException {
+            throws BaseException {
 
         List<String> erro = new ArrayList<>();
         Optional<EstabelicimentoModel> estabelecimentoOptional =
                 estabelecimentoRepository.findByCnpjAndUsuario(cnpj, usuario);
 
-        if(!estabelecimentoOptional.isPresent())
-            erro.add("Não há um estabelecimento com esse cnpj");
 
-        if(!erro.isEmpty())
-            throw new BadRequestException(erro);
+        OptionalUtils.addErrorIfObjectIsNotPresent(estabelecimentoOptional,
+                new BadRequestException("Não há um estabelecimento com esse cnpj"));
+
+        ErroUtils.validaErro(erro, new BadRequestException(erro));
 
         estabelecimentoRepository.deleteByCnpj(cnpj);
         return estabelecimentoOptional.get();
+    }
+
+    private void validaEstabelecimento(EstabelicimentoModel estabelecimento, List<String> erro){
+
+        EstabelecimentoUtils.verifyNotNullInformation(estabelecimento, erro);
+
+        CategoriaUtils categoriaUtils = new CategoriaUtils(categoriaRepository);
+        categoriaUtils.validaCategoria(estabelecimento, erro);
+
     }
 }

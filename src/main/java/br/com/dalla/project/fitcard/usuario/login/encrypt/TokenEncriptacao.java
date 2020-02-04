@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-import br.com.dalla.project.fitcard.erros.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
 import br.com.dalla.project.fitcard.usuario.login.token.TokenModel;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
 

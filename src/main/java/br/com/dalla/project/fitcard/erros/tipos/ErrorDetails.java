@@ -1,4 +1,4 @@
-package br.com.dalla.project.fitcard.erros;
+package br.com.dalla.project.fitcard.erros.tipos;
 
 public class ErrorDetails {
 

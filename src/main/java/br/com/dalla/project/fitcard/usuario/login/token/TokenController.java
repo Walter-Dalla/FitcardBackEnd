@@ -1,9 +1,7 @@
 package br.com.dalla.project.fitcard.usuario.login.token;
-import br.com.dalla.project.fitcard.erros.BadRequestException;
-import br.com.dalla.project.fitcard.erros.ConflictException;
-import br.com.dalla.project.fitcard.erros.ForbiddenException;
-import br.com.dalla.project.fitcard.usuario.login.token.TokenModel;
-import br.com.dalla.project.fitcard.usuario.login.token.TokenService;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.ConflictException;
+import br.com.dalla.project.fitcard.erros.tipos.ForbiddenException;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
 import br.com.dalla.project.fitcard.utils.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;

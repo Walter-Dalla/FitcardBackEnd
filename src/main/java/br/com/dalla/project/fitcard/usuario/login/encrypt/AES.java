@@ -1,6 +1,6 @@
 package br.com.dalla.project.fitcard.usuario.login.encrypt;
 
-import br.com.dalla.project.fitcard.erros.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
 
 import java.security.MessageDigest;
 import java.util.Arrays;

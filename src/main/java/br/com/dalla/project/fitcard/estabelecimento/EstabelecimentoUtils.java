@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EstabelecimentoUtils {
 
-    public static List<String> validEstabelecimentoOnAdd(EstabelicimentoModel estabelicimento, List<String> erro){
+    public static List<String> verifyNotNullInformation(EstabelicimentoModel estabelicimento, List<String> erro){
 
         if(estabelicimento.getRazaoSocial() == null || estabelicimento.getRazaoSocial().trim() == "")
             erro.add("Rasão social deve ser declarada");
@@ -17,21 +17,8 @@ public class EstabelecimentoUtils {
         return erro;
     }
 
-    public static List<String> validaCategoria(EstabelicimentoModel estabelicimento, CategoriaModel categoria, List<String> erro){
 
-        estabelicimento.setCategoria(categoria);
-
-        if (categoria.getCategoria().equals("Supermercado")) {
-            if (estabelicimento.getTelefone() == null || estabelicimento.getTelefone().equals(""))
-                erro.add("A categoria \"Supermercado\" exige que se adicione um telefone");
-
-        }
-
-        return erro;
-    }
-
-
-    public static EstabelicimentoModel validaEstabelecimentoOnEdditing(
+    public static EstabelicimentoModel copyObjectIfNewIsNotNull(
             EstabelicimentoModel estabelicimento, EstabelicimentoModel estabelecimentoNoBanco){
 
         if(estabelicimento.getRazaoSocial() != null)
@@ -55,7 +42,7 @@ public class EstabelecimentoUtils {
         if(estabelicimento.getEstado() != null)
             estabelecimentoNoBanco.setEstado(estabelicimento.getEstado());
 
-        if(estabelicimento.getTelefone() != null)
+        if(estabelicimento.getTelefone() != null )
             estabelecimentoNoBanco.setTelefone(estabelicimento.getTelefone());
 
         if(estabelicimento.getStatus() != null)

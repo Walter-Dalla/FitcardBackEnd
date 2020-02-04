@@ -2,9 +2,9 @@ package br.com.dalla.project.fitcard.usuario.usuario;
 
 import javax.servlet.http.HttpServletRequest;
 
-import br.com.dalla.project.fitcard.erros.BadRequestException;
-import br.com.dalla.project.fitcard.erros.ConflictException;
-import br.com.dalla.project.fitcard.erros.UnauthorizedException;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.ConflictException;
+import br.com.dalla.project.fitcard.erros.tipos.UnauthorizedException;
 import br.com.dalla.project.fitcard.usuario.login.token.TokenService;
 import br.com.dalla.project.fitcard.utils.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;

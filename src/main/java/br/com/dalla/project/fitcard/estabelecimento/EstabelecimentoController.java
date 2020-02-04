@@ -1,7 +1,7 @@
 package br.com.dalla.project.fitcard.estabelecimento;
 
-import br.com.dalla.project.fitcard.categoria.CategoriaModel;
-import br.com.dalla.project.fitcard.erros.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.BadRequestException;
+import br.com.dalla.project.fitcard.erros.tipos.BaseException;
 import br.com.dalla.project.fitcard.usuario.login.token.TokenService;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
 import br.com.dalla.project.fitcard.utils.RequestUtils;
@@ -57,7 +57,7 @@ public class EstabelecimentoController {
 
     @PostMapping
     EstabelicimentoModel addAtributos(HttpServletRequest request,
-      @RequestHeader("Token") String token, @RequestBody EstabelicimentoModel estabelicimentoModel) throws BadRequestException {
+      @RequestHeader("Token") String token, @RequestBody EstabelicimentoModel estabelicimentoModel) throws BaseException {
         UsuarioModel usuario =
                 tokenService.getUsuarioByToken(token, RequestUtils.getIpFromRequest(request));
         return estabelecimentoService.addEstabelecimento(estabelicimentoModel, usuario);
@@ -66,7 +66,7 @@ public class EstabelecimentoController {
     @PatchMapping
     EstabelicimentoModel alterAtributos(HttpServletRequest request,
         @RequestHeader("Token") String token,
-        @RequestBody EstabelicimentoModel estabelicimentoModel) throws BadRequestException {
+        @RequestBody EstabelicimentoModel estabelicimentoModel) throws BaseException {
         UsuarioModel usuario =
                 tokenService.getUsuarioByToken(token, RequestUtils.getIpFromRequest(request));
         return estabelecimentoService.alterEstabelecimento(estabelicimentoModel, usuario);
@@ -76,7 +76,7 @@ public class EstabelecimentoController {
     EstabelicimentoModel deleteAtributos(
             HttpServletRequest request,
             @RequestHeader("Token") String token,
-            @RequestParam(value = "cnpj", required = true) String cnpj) throws BadRequestException {
+            @RequestParam(value = "cnpj", required = true) String cnpj) throws BaseException {
         UsuarioModel usuario =
                 tokenService.getUsuarioByToken(token, RequestUtils.getIpFromRequest(request));
         return estabelecimentoService.deleteEstabelecimento(cnpj, usuario);

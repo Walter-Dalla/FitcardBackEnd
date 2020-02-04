@@ -1,6 +1,9 @@
 package br.com.dalla.project.fitcard.utils;
 
 
+import br.com.dalla.project.fitcard.erros.tipos.BaseException;
+
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
