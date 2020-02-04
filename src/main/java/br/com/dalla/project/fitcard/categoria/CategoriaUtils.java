@@ -20,7 +20,7 @@ public class CategoriaUtils {
         Optional<CategoriaModel> categoriaOptional =
                 categoriaRepository.findByCategoria(estabelicimento.getCategoria().getCategoria());
 
-        CategoriaModel categoria = (CategoriaModel) OptionalUtils.isObjectPresent(categoriaOptional, erro,
+        CategoriaModel categoria = (CategoriaModel) OptionalUtils.addErrorIfObjectIsNotPresent(categoriaOptional, erro,
                 "Essa categoria não existe");
 
         if (categoria != null

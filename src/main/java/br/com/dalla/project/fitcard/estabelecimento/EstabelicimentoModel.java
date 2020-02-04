@@ -2,6 +2,7 @@ package br.com.dalla.project.fitcard.estabelecimento;
 
 import br.com.dalla.project.fitcard.categoria.CategoriaModel;
 import br.com.dalla.project.fitcard.usuario.usuario.UsuarioModel;
+import br.com.dalla.project.fitcard.utils.PatternUtils;
 import br.com.dalla.project.fitcard.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -201,7 +202,7 @@ public class EstabelicimentoModel implements Serializable {
     }
 
     public void setConta(String conta) {
-        if(Utils.validateContaMask(conta))
+        if(PatternUtils.validateContaMask(conta))
             this.conta = conta;
         else
             this.conta = null;
@@ -212,7 +213,7 @@ public class EstabelicimentoModel implements Serializable {
     }
 
     public void setAgencia(String agencia) {
-        if(Utils.validateAgenciaMask(agencia))
+        if(PatternUtils.validateAgenciaMask(agencia))
             this.agencia = agencia;
         else
             this.agencia = null;

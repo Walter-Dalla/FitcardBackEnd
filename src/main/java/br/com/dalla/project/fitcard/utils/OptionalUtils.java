@@ -18,30 +18,10 @@ public class OptionalUtils {
         return null;
     }
 
-    public static Object isObjectPresent(Optional<Object> objOptional, BaseException httpErro)
-            throws BaseException {
-        if(objOptional.isPresent())
-            return objOptional.get();
-
-        if (httpErro == null)
-            return null;
-
-        throw httpErro;
-    }
-
     public static void objectCanotBePresent(Optional<?> objOptional, List<String> listaErro, String nomeDoErro){
 
         if(listaErro != null && objOptional.isPresent())
             listaErro.add(nomeDoErro);
-    }
-
-    public static Object isObjectPresent(Optional<?> objOptional, List<String> listaErro, String nomeDoErro){
-
-        if(listaErro != null && !objOptional.isPresent()) {
-            listaErro.add(nomeDoErro);
-            return null;
-        }
-        return objOptional.get();
     }
 
     public static Object addErrorIfObjectIsNotPresent(Optional<?> objOptional, List<String> listaErro, String nomeDoErro){
@@ -58,21 +38,5 @@ public class OptionalUtils {
         if(nomeDoErro != null && !objOptional.isPresent())
             throw nomeDoErro;
         return objOptional.get();
-    }
-
-    public static Object addErrorIfObjectIsPresent(Optional<?> objOptional, List<String> listaErro, String nomeDoErro){
-
-        if(listaErro != null && objOptional.isPresent()) {
-            listaErro.add(nomeDoErro);
-            return objOptional.get();
-        }
-        return null;
-    }
-
-    public static Object addErrorIfObjectIsPresent(Optional<?> objOptional, BaseException nomeDoErro) throws BaseException {
-
-        if(nomeDoErro != null && objOptional.isPresent())
-            throw nomeDoErro;
-        return null;
     }
 }
